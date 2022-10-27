@@ -6,7 +6,6 @@ solutions_arr = []
 
 solution = 57628
 
-
 def constraint_4(sol):
     if verbose: print("Constraint 4\n")
     seq_arr = seq_to_arr(sol)
@@ -103,7 +102,7 @@ def check_constraints(attempt):
     return True
 
 
-for solution in range(10000, 100000):
-    check_constraints(solution)
+for test_value in range(10000, 100000):
+    check_constraints(test_value)
 
 print(f'Solutions:\n{solutions_arr}')
