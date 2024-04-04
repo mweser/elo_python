@@ -19,17 +19,56 @@ villeneuve_movies_elo = {
     "Sicario": 1500,
     "Arrival": 1500,
     "Blade Runner 2049": 1500,
-    "Dune (Parts 1&2)": 1500,
+    "Dune (Part 1)": 1500,
+    "Dune (Part 2)": 1500,
 }
 
 movies_favorites_elo = {
     "Amelie": 1500,
     "1917": 1500,
     "EEAAO": 1500,
+    "There Will Be Blood": 1500,
+    "Licorice Pizza": 1500,
+    "Phantom of the Open": 1500,
+    "John Wick 1": 1500,
+    "John Wick 2": 1500,
+    "John Wick 3": 1500,
+    "John Wick 4": 1500,
+    "Top Gun: Maverick": 1500,
+    "The Green Knight": 1500,
+    "Valkyrie": 1500,
+    "The Disaster Artist": 1500,
+    "The Room": 1500,
+    "The Northman": 1500,
+    "The Lighthouse": 1500,
+    "Joker": 1500,
+    "Skyfall": 1500,
+    "Casino Royale": 1500,
+    "Baby Driver": 1500,
+    "Hot Fuzz": 1500,
+    "Shaun of the Dead": 1500,
+    "Brian and Charles": 1500,
+    "Life of Brian": 1500,
+    "A Hard Day's Night": 1500,
+    "Zoolander": 1500,
     "Gladiator": 1500,
     "Whiplash": 1500,
+    "The King's Speech": 1500,
+    "The King": 1500,
+    "Catch Me If You Can": 1500,
     "The Social Network": 1500,
     "The Matrix": 1500,
+    "Margin Call": 1500,
+    "Silence": 1500,
+    "Oldboy": 1500,
+    "Steve Jobs": 1500,
+    "Borat": 1500,
+    "La La Land": 1500,
+    "The Wolf of Wall Street": 1500,
+    "Goodfellas": 1500,
+    "The Aviator": 1500,
+    "Titanic": 1500,
+    "Avatar 2": 1500,
     "The Godfather Part I": 1500,
     "The Godfather Part II": 1500,
     "Citizen Kane": 1500,
@@ -61,7 +100,9 @@ movies_favorites_elo = {
     "Lawrence of Arabia": 1500,
     "Duck Soup": 1500,
     "A Night at the Opera": 1500,
-    "The Lord of the Rings": 1500,
+    "The Fellowship of the Ring": 1500,
+    "The Two Towers": 1500,
+    "The Return of the King": 1500,
 }
 
 star_wars_movies_best_elo = {
@@ -113,6 +154,7 @@ def print_rankings(movies_elo):
     print("\nCurrent Rankings:")
     for rank, (movie, rating) in enumerate(ranked_movies, start=1):
         print(f"{rank}. {movie}: {round(rating, 2)}")
+    print("------------------------------------------------")
 
 
 def get_random_matchup(movies_elo):
@@ -131,7 +173,7 @@ def main():
             count += 1
             movie1, movie2 = get_random_matchup(movies_elo)
             print(
-                f"\n{count}. Which movie do you prefer? \n1. {movie1}\n2. {movie2}\nType 1 or 2, or 'exit' to finish: ")
+                f"\n[{count}] Which movie do you prefer? \n\t1. {movie1}\n\t2. {movie2}\nType 1 or 2, or 'exit' to finish: ")
 
             choice = input()
             if choice == 'exit':
