@@ -23,6 +23,28 @@ villeneuve_movies_elo = {
     "Dune (Part 2)": 1500,
 }
 
+kids_movies_elo = {
+    "Toy Story": 1500,
+    "Toy Story 2": 1500,
+    "Toy Story 3": 1500,
+    "Coco": 1500,
+    "Finding Nemo": 1500,
+    "Monsters Inc.": 1500,
+    "Inside Out": 1500,
+    "Up": 1500,
+    "Wall-E": 1500,
+    "Ratatouille": 1500,
+    "A Bug's Life": 1500,
+    "Peter Pan": 1500,
+    "Mulan": 1500,
+    "Tangled": 1500,
+    "Brave": 1500,
+    "The Emperor's New Groove": 1500,
+    "A Goofy Movie": 1500,
+    "Shrek": 1500,
+    "Shrek 2": 1500,
+}
+
 movies_favorites_elo = {
     "Amelie": 1500,
     "1917": 1500,
@@ -125,7 +147,6 @@ star_wars_movies_elo = {
     "Solo: A Star Wars Story": 1500,
     "Rogue One: A Star Wars Story": 1500
 }
-
 
 # Initialize the movies with their initial ELO ratings
 movies_elo = {
