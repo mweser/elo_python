@@ -1,3 +1,5 @@
+import random
+
 # Initialize the movies with their initial ELO ratings
 movies_elo = {
     "Episode I: The Phantom Menace": 1500,
@@ -13,29 +15,54 @@ movies_elo = {
 }
 
 
-# Elo Rating Adjustment Function
 def update_elo(rating_winner, rating_loser, k=32):
-    """
-    Calculate the new ELO ratings for the winner and loser of a matchup.
-    The function takes the current ratings of the winner and loser, and a K-factor which determines the maximum rating change.
-    Returns the new ratings for both the winner and loser.
-    """
     expected_winner = 1 / (1 + 10 ** ((rating_loser - rating_winner) / 400))
     expected_loser = 1 - expected_winner
 
     new_rating_winner = rating_winner + k * (1 - expected_winner)
-    new_rating_loser = rating_loser + k * (0 - expected_loser)
+    new_rating_loser = rating_loser - k * expected_loser
 
     return new_rating_winner, new_rating_loser
 
 
-# Example of updating the ratings based on a matchup outcome
-winner = "Episode V: The Empire Strikes Back"
-loser = "Rogue One: A Star Wars Story"
+def print_rankings(movies_elo):
+    ranked_movies = sorted(movies_elo.items(), key=lambda x: x[1], reverse=True)
+    for rank, (movie, rating) in enumerate(ranked_movies, start=1):
+        print(f"{rank}. {movie}: {round(rating, 2)}")
 
-# Update the ratings
-movies_elo[winner], movies_elo[loser] = update_elo(movies_elo[winner], movies_elo[loser])
 
-# Print updated ratings
-for movie, rating in movies_elo.items():
-    print(f"{movie}: {rating}")
+def main():
+    try:
+        while True:
+            # Randomly select two movies for comparison
+            movie1, movie2 = random.sample(list(movies_elo.keys()), 2)
+            print(f"Which movie do you prefer? \n1. {movie1}\n2. {movie2}\nType 1 or 2: ")
+
+            # User makes a choice
+            choice = input()
+            if choice == '1':
+                winner, loser = movie1, movie2
+            elif choice == '2':
+                winner, loser = movie2, movie1
+            else:
+                print("Invalid selection, please type 1 or 2.")
+                continue
+
+            # Update ratings based on the choice
+            movies_elo[winner], movies_elo[loser] = update_elo(movies_elo[winner],
+                                                               movies_elo[loser])
+
+            # Display the updated rankings
+            print("\nUpdated Rankings:")
+            print_rankings(movies_elo)
+            print("\nNext matchup, or type 'exit' to finish.")
+            if input().lower() == 'exit':
+                break
+    except KeyboardInterrupt:
+        print("\nSimulation ended.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+if __name__ == "__main__":
+    main()
