@@ -45,6 +45,109 @@ kids_movies_elo = {
     "Shrek 2": 1500,
 }
 
+top_100_nyt_2025_movies_elo = {
+    "Parasite": 1550,
+    "Mulholland Drive": 1549,
+    "There Will Be Blood": 1548,
+    "In the Mood for Love": 1547,
+    "Moonlight": 1546,
+    "No Country for Old Men": 1545,
+    "Eternal Sunshine of the Spotless Mind": 1544,
+    "Get Out": 1543,
+    "Spirited Away": 1542,
+    "The Social Network": 1541,
+    "Mad Max: Fury Road": 1540,
+    "The Tree of Life": 1539,
+    "Children of Men": 1538,
+    "Inglourious Basterds": 1537,
+    "City of God": 1536,
+    "Pulp Fiction": 1535,
+    "Brokeback Mountain": 1534,
+    "Y Tu Mamá También": 1533,
+    "Zodiac": 1532,
+    "The Wolf of Wall Street": 1531,
+    "The Royal Tenenbaums": 1530,
+    "The Grand Budapest Hotel": 1529,
+    "Boyhood": 1528,
+    "Her": 1527,
+    "Phantom Thread": 1526,
+    "Anatomy of a Fall": 1525,
+    "Adaptation": 1524,
+    "The Dark Knight": 1523,
+    "Arrival": 1522,
+    "Lost in Translation": 1521,
+    "The Departed": 1520,
+    "Bridesmaids": 1519,
+    "A Separation": 1518,
+    "WALL-E": 1517,
+    "A Prophet": 1516,
+    "A Serious Man": 1515,
+    "Call Me by Your Name": 1514,
+    "Portrait of a Lady on Fire": 1513,
+    "Lady Bird": 1512,
+    "Yi Yi": 1511,
+    "Amélie": 1510,
+    "The Master": 1509,
+    "Oldboy": 1508,
+    "Once Upon a Time in Hollywood": 1507,
+    "Moneyball": 1506,
+    "Roma": 1505,
+    "Almost Famous": 1504,
+    "Looper": 1503,
+    "Before Sunset": 1502,
+    "Up": 1501,
+    "12 Years a Slave": 1500,
+    "The Favourite": 1499,
+    "Borat": 1498,
+    "Pan's Labyrinth": 1497,
+    "Inception": 1496,
+    "Punch-Drunk Love": 1495,
+    "Best in Show": 1494,
+    "Uncut Gems": 1493,
+    "Toni Erdmann": 1492,
+    "Whiplash": 1491,
+    "Kill Bill": 1490,
+    "Memento": 1489,
+    "The Grand Budapest Hotel": 1488,
+    "Gone Girl": 1487,
+    "Oppenheimer": 1486,
+    "Spotlight": 1485,
+    "I, Tonya": 1484,
+    "The Hurt Locker": 1483,
+    "Under the Skin": 1482,
+    "Manchester by the Sea": 1481,
+    "Ocean's Eleven": 1480,
+    "Carol": 1479,
+    "Knives Out": 1478,
+    "The Florida Project": 1477,
+    "Amour": 1476,
+    "O Brother, Where Art Thou?": 1475,
+    "Speed Racer": 1474,
+    "Aftersun": 1473,
+    "The Tree of Life": 1472,
+    "Volver": 1471,
+    "Black Swan": 1470,
+    "The Act of Killing": 1469,
+    "Inside Llewyn Davis": 1468,
+    "Melancholia": 1467,
+    "Anchorman": 1466,
+    "Past Lives": 1465,
+    "The Lord of the Rings": 1464,
+    "The Gleaners and I": 1463,
+    "Interstellar": 1462,
+    "Frances Ha": 1461,
+    "Fish Tank": 1460,
+    "Gladiator": 1459,
+    "Michael Clayton": 1458,
+    "Minority Report": 1457,
+    "The Worst Person in the World": 1456,
+    "Black Panther": 1455,
+    "Gravity": 1454,
+    "Green Book": 1453,
+    "World of Tomorrow": 1452,
+    "Superbad": 1451
+}
+
 movies_favorites_elo = {
     "Amelie": 1500,
     "1917": 1500,
@@ -150,10 +253,11 @@ star_wars_movies_elo = {
 
 # Initialize the movies with their initial ELO ratings
 movies_elo = {
-    **nolan_movies_elo,
-    **villeneuve_movies_elo,
-    **star_wars_movies_best_elo,
-    **movies_favorites_elo,
+    **top_100_nyt_2025_movies_elo,
+    # **nolan_movies_elo,
+    # **villeneuve_movies_elo,
+    # **star_wars_movies_best_elo,
+    # **movies_favorites_elo,
 }
 
 # To avoid repeating matchups too frequently
@@ -194,7 +298,7 @@ def main():
             count += 1
             movie1, movie2 = get_random_matchup(movies_elo)
             print(
-                f"\n[{count}] Which movie do you prefer? \n\t1. {movie1}\n\t2. {movie2}\nType 1 or 2, or 'exit' to finish: ")
+                f"\n[{count}] Which movie do you prefer? \n\t1. {movie1}\n\t2. {movie2}\n\t3. Skip\nType 1, 2, 3, or 'exit' to finish: ")
 
             choice = input()
             if choice == 'exit':
@@ -203,11 +307,16 @@ def main():
                 winner, loser = movie1, movie2
             elif choice == '2':
                 winner, loser = movie2, movie1
+            elif choice == '3':
+                print("Skipping this matchup...")
+                continue
             else:
                 print("Invalid selection, please type 1 or 2.")
                 continue
 
-            movies_elo[winner], movies_elo[loser] = update_elo(movies_elo[winner],
+            if choice in ['1', '2']:
+                print(f"You selected: {winner} over {loser}")
+                movies_elo[winner], movies_elo[loser] = update_elo(movies_elo[winner],
                                                                movies_elo[loser])
             print_rankings(movies_elo)
 
